@@ -28,17 +28,17 @@ public class UserController {
         return userService.creer(user);
     }
 
-    @GetMapping("read")
+    @GetMapping("/read")
     public List<User> read(){
         return userService.lire();
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("/update/{id_user}")
     public User update(@PathVariable Integer id_user, @RequestBody User user){
-        return userService.modifier( id_user,user);
+        return userService.modifier(id_user,user);
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping("/delete/{id_user}")
     public String delete(@PathVariable Integer id_user){
         return userService.supprimer(id_user);
     }
