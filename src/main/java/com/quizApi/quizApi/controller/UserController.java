@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.quizApi.quizApi.models.Quiz;
 import com.quizApi.quizApi.models.User;
 import com.quizApi.quizApi.service.UserService;
 
@@ -22,7 +23,7 @@ import lombok.AllArgsConstructor;
 public class UserController {
     //Injection de userService
     private final UserService userService;
-
+ 
     @PostMapping("/users")
     public User create(@RequestBody User user){
         return userService.creer(user);
@@ -33,9 +34,11 @@ public class UserController {
         return userService.lire();
     }
 
+
+
     @GetMapping("/users/{id_user}")
     public User read(@PathVariable Integer id_user){
-        return userService.lire(id_user, null);
+        return userService.lire(id_user);
     } 
 
     @PutMapping("/users/{id_user}")
@@ -46,6 +49,12 @@ public class UserController {
     @DeleteMapping("/users/{id_user}")
     public String delete(@PathVariable Integer id_user){
         return userService.supprimer(id_user);
+    }
+
+     @GetMapping("/users/{id_user}/quizs")
+    public List<Quiz> getUserQuizzes(@PathVariable Integer id_user) {
+        return userService.avoirListQuizs(id_user);
+        
     }
 
 }

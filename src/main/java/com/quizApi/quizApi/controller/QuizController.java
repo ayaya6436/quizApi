@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.quizApi.quizApi.models.Quiz;
+import com.quizApi.quizApi.models.User;
+import com.quizApi.quizApi.repersitory.UserRepository;
 import com.quizApi.quizApi.service.QuizService;
 
 import lombok.AllArgsConstructor;
@@ -24,10 +26,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class QuizController {
     //Injection de QuizService
     private final QuizService quizService;
+        private final UserRepository userRepository;
+
 
     @PostMapping("/quizs")
     public Quiz create(@RequestBody Quiz quiz){
-        return quizService.creer(quiz);
+        Integer userId = quiz.getUser().getId(); // Récupérez l'ID de l'utilisateur du quiz
+
+    User user = userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+
+    quiz.setUser(user); // Définissez l'utilisateur sur le quiz
+
+    return quizService.creer(quiz);
 
     }
 
@@ -38,7 +49,7 @@ public class QuizController {
 
     @GetMapping("/quizs/{id_quiz}")
     public Quiz read(@PathVariable Integer id_quiz){
-        return quizService.lire(id_quiz, null);
+        return quizService.lire(id_quiz);
     }
 
     @PutMapping("quizs/{id_quiz}")
@@ -47,9 +58,14 @@ public class QuizController {
     }
 
     @DeleteMapping("quizs/{id_quiz}")
-        public String delete(@PathVariable Integer id_quiz){
-            return quizService.supprimer(id_quiz);
-        }
+    public String delete(@PathVariable Integer id_quiz){
+        return quizService.supprimer(id_quiz);
+    }
+    @GetMapping("quizs/users/{id_user}")
+    public List<Quiz> AvoirListQuizParIdUser(@PathVariable Integer id_user) {
+        return quizService.AvoirListQuizParIdUser(id_user);
+        
+    }
     
 
 

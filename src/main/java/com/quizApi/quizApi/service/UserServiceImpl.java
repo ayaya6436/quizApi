@@ -1,11 +1,13 @@
 package com.quizApi.quizApi.service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.stereotype.Service;
 
+import com.quizApi.quizApi.models.Quiz;
 import com.quizApi.quizApi.models.User;
+
 import com.quizApi.quizApi.repersitory.UserRepository;
 
 import lombok.AllArgsConstructor;
@@ -16,6 +18,8 @@ import lombok.AllArgsConstructor;
 public class UserServiceImpl implements UserService{
     //injection de UserRepository
     private final UserRepository userRepository;
+  
+    
 
     @Override
     public User creer(User user) {
@@ -23,17 +27,21 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<User> lire() {
-       return userRepository.findAll();
+   public List<User> lire() {
+        return userRepository.findAll();
     }
-    
    
      @Override
-    public User lire(Integer id_user, User user) {
-        Optional<User> userOptional = userRepository.findById(id_user);
-        return userOptional.orElse(null);
+    public User lire(Integer id_user) {
+        return userRepository.findById(id_user).orElse(null);
     }
 
+    public List<Quiz> avoirListQuizs(Integer id_user){
+        User user = userRepository.findById(id_user)
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'ID : " + id_user));
+        return user.getQuiz();
+    }
+    
 
     @Override
     public User modifier(Integer id_user, User user) {
@@ -44,7 +52,7 @@ public class UserServiceImpl implements UserService{
             u.setUsername(user.getUsername());
             u.setPassword(user.getPassword());
             return userRepository.save(u);
-         }).orElseThrow(()->new RuntimeException("User non trouve"));
+         }).orElseThrow(()->new RuntimeException("User non trouve avec l'ID:" +id_user));
     }
 
     @Override
@@ -54,5 +62,7 @@ public class UserServiceImpl implements UserService{
     }
 
    
+
+  
     
 }
