@@ -2,6 +2,7 @@ package com.quizApi.quizApi.service;
 
 import java.util.List;
 
+
 import com.quizApi.quizApi.models.User;
 
 public interface UserService {
@@ -10,6 +11,8 @@ public interface UserService {
 
     //Avoir la liste des users
     List<User> lire();
+    //avoir un use par id
+    User lire(Integer id_user, User user);
 
     //Modifier les users
     User modifier(Integer id_user,User user);

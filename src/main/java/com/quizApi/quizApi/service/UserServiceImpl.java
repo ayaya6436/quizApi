@@ -1,6 +1,7 @@
 package com.quizApi.quizApi.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,14 @@ public class UserServiceImpl implements UserService{
     public List<User> lire() {
        return userRepository.findAll();
     }
+    
+   
+     @Override
+    public User lire(Integer id_user, User user) {
+        Optional<User> userOptional = userRepository.findById(id_user);
+        return userOptional.orElse(null);
+    }
+
 
     @Override
     public User modifier(Integer id_user, User user) {
@@ -43,5 +52,7 @@ public class UserServiceImpl implements UserService{
         userRepository.deleteById(id_user);
         return "user supprimer avec succes";
     }
+
+   
     
 }

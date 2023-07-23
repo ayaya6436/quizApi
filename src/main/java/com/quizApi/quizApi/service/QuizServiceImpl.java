@@ -29,6 +29,13 @@ public class QuizServiceImpl implements QuizService{
         return quizRepository.findAll();
     }
 
+
+     @Override
+    public Quiz lire(Integer id_quiz,Quiz quiz) {
+        Optional<Quiz> quizOptional = quizRepository.findById(id_quiz);
+        return quizOptional.orElseThrow(()-> new RuntimeException("quiz non trouve"));
+    }
+
     @Override
     public Quiz modifier(Integer id_quiz, Quiz quiz) {
         return quizRepository.findById(id_quiz)
@@ -46,12 +53,7 @@ public class QuizServiceImpl implements QuizService{
         return "quiz supprimer avec success";
     }
 
-    @Override
    
-    public Quiz lire(Integer id_quiz,Quiz quiz) {
-        Optional<Quiz> quizOptional = quizRepository.findById(id_quiz);
-        return quizOptional.orElse(null);
-    }
   
     
 }

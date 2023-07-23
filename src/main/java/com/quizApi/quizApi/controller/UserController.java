@@ -18,27 +18,32 @@ import lombok.AllArgsConstructor;
 @RestController
 @AllArgsConstructor
 
-@RequestMapping("/user") 
+@RequestMapping("/apiQuiz") 
 public class UserController {
     //Injection de userService
     private final UserService userService;
 
-    @PostMapping("/create")
+    @PostMapping("/users")
     public User create(@RequestBody User user){
         return userService.creer(user);
     }
 
-    @GetMapping("/read")
+    @GetMapping("/users")
     public List<User> read(){
         return userService.lire();
     }
 
-    @PutMapping("/update/{id_user}")
+    @GetMapping("/users/{id_user}")
+    public User read(@PathVariable Integer id_user){
+        return userService.lire(id_user, null);
+    } 
+
+    @PutMapping("/users/{id_user}")
     public User update(@PathVariable Integer id_user, @RequestBody User user){
         return userService.modifier(id_user,user);
     }
 
-    @DeleteMapping("/delete/{id_user}")
+    @DeleteMapping("/users/{id_user}")
     public String delete(@PathVariable Integer id_user){
         return userService.supprimer(id_user);
     }
