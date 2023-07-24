@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.quizApi.quizApi.models.Answer;
 import com.quizApi.quizApi.models.Question;
-import com.quizApi.quizApi.models.Quiz;
-import com.quizApi.quizApi.models.User;
 import com.quizApi.quizApi.repository.AnswerRepository;
 import com.quizApi.quizApi.repository.QuestionRepository;
 
@@ -17,6 +15,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class AnswerServiceImpl implements AnswerService {
+    
     private final AnswerRepository answerRepository;
     private final QuestionRepository questionRepository;
 

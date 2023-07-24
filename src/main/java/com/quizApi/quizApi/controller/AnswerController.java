@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.quizApi.quizApi.models.Answer;
-import com.quizApi.quizApi.models.Question;
-import com.quizApi.quizApi.models.Quiz;
 import com.quizApi.quizApi.service.AnswerService;
-import com.quizApi.quizApi.service.QuestionService;
+
 
 import lombok.AllArgsConstructor;
 @AllArgsConstructor
