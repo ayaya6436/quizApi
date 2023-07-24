@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.quizApi.quizApi.models.Quiz;
-import com.quizApi.quizApi.models.User;
-import com.quizApi.quizApi.repersitory.UserRepository;
+
 import com.quizApi.quizApi.service.QuizService;
+
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,19 +27,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class QuizController {
     //Injection de QuizService
     private final QuizService quizService;
-        private final UserRepository userRepository;
+    // private final UserService userService;
 
 
     @PostMapping("/quizs")
     public Quiz create(@RequestBody Quiz quiz){
-        Integer userId = quiz.getUser().getId(); // Récupérez l'ID de l'utilisateur du quiz
-
-    User user = userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
-
-    quiz.setUser(user); // Définissez l'utilisateur sur le quiz
-
-    return quizService.creer(quiz);
+        return quiz;
+        // return quizService.creer(quiz);
 
     }
 
@@ -65,6 +60,12 @@ public class QuizController {
     public List<Quiz> AvoirListQuizParIdUser(@PathVariable Integer id_user) {
         return quizService.AvoirListQuizParIdUser(id_user);
         
+    }
+    
+
+    @PostMapping("/users/{id_user}/quizs")
+        public Quiz creerQuizPourUser(@PathVariable Integer id_user, @RequestBody Quiz quiz) {
+        return quizService.creerQuizPourUser(id_user, quiz);
     }
     
 

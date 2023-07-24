@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.quizApi.quizApi.models.Quiz;
 import com.quizApi.quizApi.models.User;
-
-import com.quizApi.quizApi.repersitory.UserRepository;
+import com.quizApi.quizApi.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
 

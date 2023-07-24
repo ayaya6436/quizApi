@@ -2,6 +2,7 @@ package com.quizApi.quizApi.service;
 
 import java.util.List;
 
+
 import com.quizApi.quizApi.models.Quiz;
 
 public interface QuizService {
@@ -17,5 +18,7 @@ public interface QuizService {
     String supprimer(Integer id_quiz);
     //Avoir la liste des quizs associes a un user
     List<Quiz> AvoirListQuizParIdUser(Integer id_user);
+    //creer une quiz pour quiz
+    Quiz creerQuizPourUser(Integer id_user, Quiz quiz);
    
 }

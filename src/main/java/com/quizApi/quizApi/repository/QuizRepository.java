@@ -1,4 +1,4 @@
-package com.quizApi.quizApi.repersitory;
+package com.quizApi.quizApi.repository;
 
 import java.util.List;
 
