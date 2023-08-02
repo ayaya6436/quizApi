@@ -35,4 +35,8 @@ public class Quiz {
     @JsonIgnoreProperties
     ("quiz") // Ajout de cette annotation pour éviter la récursivité JSON avec Question
     private List<Question> questions;
+
+
+     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+     private List<Participation> participation;
 }

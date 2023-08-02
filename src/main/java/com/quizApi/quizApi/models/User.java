@@ -33,5 +33,8 @@ public class User {
 
     @OneToMany(mappedBy="user",cascade= CascadeType.ALL)
     private List<Quiz> quiz;
+
+    @OneToMany(mappedBy="user",cascade= CascadeType.ALL)
+    private List<Participation> participation;
    
 }

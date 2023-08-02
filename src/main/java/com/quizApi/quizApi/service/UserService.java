@@ -20,7 +20,7 @@ public interface UserService {
 
     //Supprimer les users
     String supprimer(Integer id_user);
-//Avoir la liste des quiz
+    //Avoir la liste des quiz par iduser
     List<Quiz> avoirListQuizs(Integer id_user);
 
 }
